@@ -14,8 +14,8 @@ namespace eShopData.Configurations
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.ToTable("Contacts");
-            builder.HasKey(x => x.ID);
-            builder.Property(x => x.ID).UseIdentityColumn();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(50).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(20).IsRequired();
