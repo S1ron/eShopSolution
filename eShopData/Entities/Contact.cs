@@ -9,7 +9,7 @@ namespace eShopData.Entities
 {
     public class Contact
     {
-        public int ID {set; get;}
+        public int Id {set; get;}
         public string Name {set; get;}
         public string Email {set; get;}
         public string PhoneNumber {set; get;}
