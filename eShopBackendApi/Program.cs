@@ -1,4 +1,5 @@
 using eShopApplication.Catalog.Products;
+using eShopApplication.Common;
 using eShopData.EF;
 using eShopUtilities.Constants;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,9 @@ namespace eShopBackendApi
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
 
             //Declare DI
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
