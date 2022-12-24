@@ -15,7 +15,7 @@ namespace eShopViewModels.System.Users
         public string PhoneNumber { set; get; }
         public string UserName { set; get; }
         public string Password { set; get; }
-        public string ComfirmPassword { set; get; }
+        public string ConfirmPassword { set; get; }
 
     }
 }

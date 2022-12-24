@@ -4,6 +4,9 @@ using eShopApplication.System.Users;
 using eShopData.EF;
 using eShopData.Entities;
 using eShopUtilities.Constants;
+using eShopViewModels.System.Users;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,8 +41,11 @@ namespace eShopBackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>(); 
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>(); 
             services.AddTransient<IUserService, UserService>();
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();   
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();   
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
 
             services.AddSwaggerGen(c =>
