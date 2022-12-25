@@ -25,7 +25,8 @@ namespace eShopBackendApi
 
 
             //--------------------------------------------------
-    //ConfigureServices(builder.Services) => service
+            //ConfigureServices(builder.Services) => service
+
             services.AddDbContext<EShopDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
 
