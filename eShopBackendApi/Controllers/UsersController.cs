@@ -1,4 +1,4 @@
-﻿using eShopApplication.System.Users;
+﻿    using eShopApplication.System.Users;
 using eShopViewModels.System.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +30,7 @@ namespace eShopBackendApi.Controllers
             return Ok(resultToken);
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterRequest request)
         {
@@ -43,6 +43,14 @@ namespace eShopBackendApi.Controllers
                 return BadRequest("Register is unsuccessful.");
             }
             return Ok();
+        }
+
+        //https://localhost:1001/api/users/paging?pageIndex=1&pageSize=10&keyword=awkdak
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery]GetUserPagingRequest request)
+        {
+            var users = await _userService.GetUserPaging(request);
+            return Ok(users);
         }
     }
 }

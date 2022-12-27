@@ -1,5 +1,7 @@
-﻿using eShopViewModels.System.Users;
+﻿using eShopViewModels.Common;
+using eShopViewModels.System.Users;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -8,9 +10,11 @@ namespace eShopAdminApp.Services
     public class UserApiClient : IUserApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public UserApiClient(IHttpClientFactory httpClientFactory)
+        private readonly IConfiguration _configuration;
+        public UserApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
+            _configuration = configuration;
         }
         public async Task<string> Authenticate(LoginRequest request)
         {
@@ -18,10 +22,22 @@ namespace eShopAdminApp.Services
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("https://localhost:5001");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             var response = await client.PostAsync("/api/users/authenticate", httpContent);
             var token = await response.Content.ReadAsStringAsync();
             return token;
+        }
+
+        public async Task<PagedResult<UserViewModel>> GetUsersPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/Users/paging?PageIndex=" +
+                $"{request.PageIndex}&PageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<PagedResult<UserViewModel>>(body);
+            return users;
         }
     }
 }
