@@ -30,7 +30,7 @@ namespace eShopAdminApp
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserApiClient, UserApiClient>();
 
             IMvcBuilder mvcBuilder = services.AddRazorPages();
