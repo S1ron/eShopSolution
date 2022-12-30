@@ -1,5 +1,6 @@
 using eShopApplication.Catalog.Products;
 using eShopApplication.Common;
+using eShopApplication.System.Roles;
 using eShopApplication.System.Users;
 using eShopData.EF;
 using eShopData.Entities;
@@ -41,6 +42,9 @@ namespace eShopBackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>(); 
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>(); 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
+
+
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();   
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();   
 

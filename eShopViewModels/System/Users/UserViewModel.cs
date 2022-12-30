@@ -15,5 +15,6 @@ namespace eShopViewModels.System.Users
         public string UserName { set; get; }
         public string Email { set; get; }
         public DateTime Dob { set; get; }
+        public IList<string> Roles { set; get; }
     }
 }
