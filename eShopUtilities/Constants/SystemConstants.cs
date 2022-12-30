@@ -9,5 +9,11 @@ namespace eShopUtilities.Constants
     public class SystemConstants
     {
         public const string MainConnectionString = "eShopDb";
+        public class AppSettings
+        {
+            public const string DefautLanguageId = "DefautLanguageId";
+            public const string Token = "Token";
+            public const string BaseAddress = "BaseAddress";
+        }
     }
 }
