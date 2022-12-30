@@ -5,6 +5,27 @@
     ViewData["Title"] = "Danh sách người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Scripts{
+    <script>
+        setTimeout(function(){
+            var fadeTarget = document.getElementById("msgAlert");
+            var fadeEffect = setInterval(function () {
+                if (!fadeTarget.style.opacity) {
+                    fadeTarget.style.opacity = 1;
+                }
+                if (fadeTarget.style.opacity > 0) {
+                    fadeTarget.style.opacity -= 0.05;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 100);
+        }, 2000)
+        setTimeout(function(){
+            document.getElementById("msgAlert").parentElement.removeChild(document.getElementById("msgAlert"))
+        }, 4500)
+
+    </script>
+}
 <div class="container-fluid">
     <h1 class="mt-4">Danh sách người dùng</h1>
     <ol class="breadcrumb mb-4">
@@ -34,6 +55,14 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
