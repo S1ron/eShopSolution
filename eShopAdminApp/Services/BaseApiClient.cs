@@ -40,7 +40,30 @@ namespace eShopAdminApp.Services
             }
             return JsonConvert.DeserializeObject<TResponse>(body);
         }
-        
+
+
+        protected async Task<List<TResponse>> GetListAsync<TResponse>(string url)
+        {
+            var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstants.AppSettings.Token);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync(url);
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var myDeserializedObjList = (List<TResponse>)JsonConvert.DeserializeObject(body,
+                    typeof(List<TResponse>));
+
+                return myDeserializedObjList;
+            }
+            throw new Exception(body);
+        }
+
         protected async Task<ApiResult<TResponse>> PutAsync<TResponse, Request>(string url, Request request)
         {
             var sessions = _httpContextAccessor
