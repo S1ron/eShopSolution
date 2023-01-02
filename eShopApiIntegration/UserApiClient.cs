@@ -1,11 +1,13 @@
 ﻿using eShopViewModels.Common;
 using eShopViewModels.System.Users;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public class UserApiClient : BaseApiClient, IUserApiClient
     {

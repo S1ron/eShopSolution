@@ -1,7 +1,7 @@
 ﻿using eShopViewModels.Catalog.Products;
 using eShopViewModels.Common;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public interface IProductApiClient
     {

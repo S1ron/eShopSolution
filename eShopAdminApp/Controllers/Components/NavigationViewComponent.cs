@@ -1,5 +1,5 @@
 ﻿using eShopAdminApp.Models;
-using eShopAdminApp.Services;
+using eShopApiIntegration;
 using eShopUtilities.Constants;
 using eShopViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
