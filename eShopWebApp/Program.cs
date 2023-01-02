@@ -6,10 +6,22 @@ namespace eShopWebApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var services = builder.Services;
+            var Configuration = builder.Configuration;
 
-            // Add services to the container.
+
+    //--------------------------------------------------
+            //ConfigureServices(builder.Services) => service
             builder.Services.AddControllersWithViews();
 
+
+
+
+            //End ConfigureServices
+    //-----------------------------------------------------
+
+
+            //Configure(app, builder.Environment) => app
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
