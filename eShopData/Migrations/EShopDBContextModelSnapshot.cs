@@ -185,7 +185,7 @@ namespace eShopData.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "a22fbc14-920e-4acf-abd2-fbedc787533f",
+                            ConcurrencyStamp = "84375fdd-a9b3-40b0-90ba-0cb547ee2f25",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -262,7 +262,7 @@ namespace eShopData.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03a0c889-661c-4529-ac38-fe8a61237591",
+                            ConcurrencyStamp = "66570d2d-af0b-403e-b0f9-c1d35ef2f719",
                             Dob = new DateTime(2003, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "anhvu.siron@gmail.com",
                             EmailConfirmed = true,
@@ -271,7 +271,7 @@ namespace eShopData.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "anhvu.siron@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFi9XyShl+kjOiYi978jUd18/iSzFaTbb6gxlj5JTDeibncgrKg1Xmaew51XQo6RAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEItfnm674DjhN015LFbnrJqQhmYccz59L74A87LUq8cWa/hQVRRV07azqXmlRJ+g/A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -404,7 +404,7 @@ namespace eShopData.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo nam",
                             SeoAlias = "ao-nam",
                             SeoDescription = "Sản phẩm áo thời trang nam",
@@ -414,7 +414,7 @@ namespace eShopData.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Men Shirt",
                             SeoAlias = "men-shirt",
                             SeoDescription = "The shirt products for men",
@@ -424,7 +424,7 @@ namespace eShopData.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo nữ",
                             SeoAlias = "ao-nu",
                             SeoDescription = "Sản phẩm áo thời trang nữ",
@@ -434,7 +434,7 @@ namespace eShopData.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Women Shirt",
                             SeoAlias = "women-shirt",
                             SeoDescription = "The shirt products for women",
@@ -499,13 +499,13 @@ namespace eShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "vi-VN",
+                            Id = "vi",
                             IsDefault = true,
                             Name = "Tiếng Việt"
                         },
                         new
                         {
-                            Id = "en-US",
+                            Id = "en",
                             IsDefault = false,
                             Name = "English"
                         });
@@ -522,7 +522,7 @@ namespace eShopData.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 12, 21, 20, 22, 49, 597, DateTimeKind.Local).AddTicks(6245));
+                        .HasDefaultValue(new DateTime(2023, 1, 2, 21, 25, 17, 568, DateTimeKind.Local).AddTicks(78));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -613,7 +613,7 @@ namespace eShopData.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2022, 12, 21, 20, 22, 49, 600, DateTimeKind.Local).AddTicks(7569),
+                            DateCreated = new DateTime(2023, 1, 2, 21, 25, 17, 570, DateTimeKind.Local).AddTicks(9353),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -741,7 +741,7 @@ namespace eShopData.Migrations
                             Id = 1,
                             Description = "Áo sơ mi nam trắng Việt Tiến",
                             Details = "Áo sơ mi nam trắng Việt Tiến",
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo sơ mi nam trắng Việt Tiến",
                             ProductId = 1,
                             SeoAlias = "ao-so-mi-nam-trang-viet-tien",
@@ -753,7 +753,7 @@ namespace eShopData.Migrations
                             Id = 2,
                             Description = "Viet Tien Men T-Shirt",
                             Details = "Viet Tien Men T-Shirt",
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Viet Tien Men T-Shirt",
                             ProductId = 1,
                             SeoAlias = "viet-tien-men-t-shirt",
