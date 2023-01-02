@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eShopApiIntegration\eShopApiIntegration.csproj" />
     <ProjectReference Include="..\eShopUtilities\eShopUtilities.csproj" />
     <ProjectReference Include="..\eShopViewModels\eShopViewModels.csproj" />
   </ItemGroup>

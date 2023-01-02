@@ -1,7 +1,7 @@
 ﻿using eShopViewModels.Common;
 using eShopViewModels.System.Roles;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public interface IRoleApiClient
     {

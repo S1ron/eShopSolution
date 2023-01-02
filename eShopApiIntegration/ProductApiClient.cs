@@ -1,11 +1,13 @@
 ﻿using eShopUtilities.Constants;
 using eShopViewModels.Catalog.Products;
 using eShopViewModels.Common;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public class ProductApiClient : BaseApiClient, IProductApiClient
     {
@@ -86,6 +88,12 @@ namespace eShopAdminApp.Services
         {
             var data = await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
 
+            return data;
+        }
+
+        public async Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take)
+        {
+            var data = await GetListAsync<ProductViewModel>($"/api/products/featured/{languageId}/{take}");
             return data;
         }
     }

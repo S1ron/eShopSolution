@@ -1,7 +1,7 @@
 ﻿using eShopViewModels.Common;
 using eShopViewModels.System.Users;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public interface IUserApiClient
     {

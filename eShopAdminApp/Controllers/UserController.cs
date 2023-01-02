@@ -1,4 +1,4 @@
-﻿using eShopAdminApp.Services;
+﻿using eShopApiIntegration;
 using eShopViewModels.Common;
 using eShopViewModels.System.Users;
 using Microsoft.AspNetCore.Authentication;

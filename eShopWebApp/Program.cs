@@ -1,4 +1,5 @@
 
+using eShopApiIntegration;
 using eShopWebApp.LocalizationResources;
 using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Localization;
@@ -17,6 +18,9 @@ namespace eShopWebApp
 
             //--------------------------------------------------
             //ConfigureServices(builder.Services) => service
+
+            services.AddHttpClient();
+
             var cultures = new[]
             {
                 new CultureInfo("vi"),
@@ -55,10 +59,21 @@ namespace eShopWebApp
             });
 
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ISlideApiClient, SlideApiClient>();
+            services.AddTransient<IProductApiClient, ProductApiClient>();
+
+
+
 
 
             //End ConfigureServices
-    //-----------------------------------------------------
+            //-----------------------------------------------------
 
 
             //Configure(app, builder.Environment) => app
@@ -79,6 +94,7 @@ namespace eShopWebApp
 
             app.UseAuthorization();
 
+            app.UseSession();
             app.UseRequestLocalization();
             app.MapControllerRoute(
                 name: "default",

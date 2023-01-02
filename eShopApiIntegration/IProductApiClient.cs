@@ -1,7 +1,7 @@
 ﻿using eShopViewModels.Catalog.Products;
 using eShopViewModels.Common;
 
-namespace eShopAdminApp.Services
+namespace eShopApiIntegration
 {
     public interface IProductApiClient
     {
@@ -9,5 +9,6 @@ namespace eShopAdminApp.Services
         Task<bool> CreateProduct(ProductCreateRequest request);
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
         Task<ProductViewModel> GetById(int id, string languageId);
+        Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take);
     }
 }

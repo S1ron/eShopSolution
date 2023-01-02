@@ -1,8 +1,10 @@
 ﻿using eShopViewModels.Catalog.Categories;
 using eShopViewModels.Common;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
-namespace eShopAdminApp.Services
-{
+namespace eShopApiIntegration 
+{ 
     public class CategoryApiClient : BaseApiClient ,ICategoryApiClient
     {
         public CategoryApiClient(IHttpClientFactory httpClientFactory, 
