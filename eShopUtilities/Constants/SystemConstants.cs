@@ -15,5 +15,9 @@ namespace eShopUtilities.Constants
             public const string Token = "Token";
             public const string BaseAddress = "BaseAddress";
         }
+        public class ProductSettings
+        {
+            public const int NumberOfFeatureProducts = 4;
+        }
     }
 }

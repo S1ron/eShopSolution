@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using eShopViewModels.Catalog.ProductImages;
 using eShopViewModels.Catalog.Categories;
+using System.Globalization;
 
 namespace eShopApplication.Catalog.Products
 {
@@ -28,5 +29,6 @@ namespace eShopApplication.Catalog.Products
         Task<ProductImageViewModel> GetImageById(int imageId);
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+        Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take);
     }
 }
