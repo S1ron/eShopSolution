@@ -27,5 +27,7 @@ namespace eShopBackendApi.Controllers
             var categories = await _categoryService.GetById(languageId, id);
             return Ok(categories);
         }
+
+        
     }
 }

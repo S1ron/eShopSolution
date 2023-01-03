@@ -177,17 +177,17 @@ namespace eShopApplication.Catalog.Products
             productTranslations.Details = request.Details;
 
             //save img
-            if (request.ThumbnailImage != null)
-            {
-                var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.Id);
-                if (thumbnailImage != null)
-                {
-                    thumbnailImage.FileSize = request.ThumbnailImage.Length;
-                    await _storageService.DeleteFileAsync(thumbnailImage.ImagePath);
-                    thumbnailImage.ImagePath = await SaveFile(request.ThumbnailImage);
-                    _context.ProductImages.Update(thumbnailImage);
-                }
-            }
+            //if (request.ThumbnailImage != null)
+            //{
+            //    var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.Id);
+            //    if (thumbnailImage != null)
+            //    {
+            //        thumbnailImage.FileSize = request.ThumbnailImage.Length;
+            //        await _storageService.DeleteFileAsync(thumbnailImage.ImagePath);
+            //        thumbnailImage.ImagePath = await SaveFile(request.ThumbnailImage);
+            //        _context.ProductImages.Update(thumbnailImage);
+            //    }
+            //}
 
             return await _context.SaveChangesAsync();
         }
@@ -223,7 +223,7 @@ namespace eShopApplication.Catalog.Products
             var product = await _context.Products.FindAsync(productId);
             var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId
             && x.LanguageId == languageId);
-            var pimg =await _context.ProductImages.FirstOrDefaultAsync(x => x.ProductId == productId);
+            var pimg = await _context.ProductImages.Where(x => x.ProductId == productId).FirstOrDefaultAsync();
 
             var categories = await (from c in _context.Categories
                               join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
@@ -248,7 +248,7 @@ namespace eShopApplication.Catalog.Products
                 Stock = product.Stock,
                 ViewCount = product.ViewCount,
                 Categories = categories,
-                ThumbnailImage = pimg.ImagePath
+                ThumbnailImage = pimg != null ? pimg.ImagePath : "no-image"
             };
             return productViewModel;
         }
