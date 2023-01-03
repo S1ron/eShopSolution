@@ -17,6 +17,7 @@ using eShopViewModels.Catalog.ProductImages;
 using eShopViewModels.Catalog.Categories;
 using Microsoft.AspNetCore.Identity;
 using eShopUtilities.Constants;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eShopApplication.Catalog.Products
 {
@@ -222,6 +223,7 @@ namespace eShopApplication.Catalog.Products
             var product = await _context.Products.FindAsync(productId);
             var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId
             && x.LanguageId == languageId);
+            var pimg =await _context.ProductImages.FirstOrDefaultAsync(x => x.ProductId == productId);
 
             var categories = await (from c in _context.Categories
                               join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
@@ -245,7 +247,8 @@ namespace eShopApplication.Catalog.Products
                 SeoTitle = productTranslation != null ? productTranslation.SeoTitle : null,
                 Stock = product.Stock,
                 ViewCount = product.ViewCount,
-                Categories = categories
+                Categories = categories,
+                ThumbnailImage = pimg.ImagePath
             };
             return productViewModel;
         }
