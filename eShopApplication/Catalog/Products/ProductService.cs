@@ -16,6 +16,7 @@ using eShopApplication.Common;
 using eShopViewModels.Catalog.ProductImages;
 using eShopViewModels.Catalog.Categories;
 using Microsoft.AspNetCore.Identity;
+using eShopUtilities.Constants;
 
 namespace eShopApplication.Catalog.Products
 {
@@ -30,16 +31,13 @@ namespace eShopApplication.Catalog.Products
         }
         public async Task<int> Create(ProductCreateRequest request)
         {
-            var product = new Product()
+            var languages = _context.Languages;
+            var translations = new List<ProductTranslation>();
+            foreach (var language in languages)
             {
-                Price = request.Price,
-                OriginalPrice = request.OriginalPrice,
-                Stock = request.Stock,
-                ViewCount = 0,
-                DateCreated = DateTime.Now,
-                ProductTranslations = new List<ProductTranslation>() 
-                { 
-                    new ProductTranslation()
+                if (language.Id == request.LanguageId)
+                {
+                    translations.Add(new ProductTranslation()
                     {
                         Name = request.Name,
                         Description = request.Description,
@@ -47,10 +45,33 @@ namespace eShopApplication.Catalog.Products
                         SeoDescription = request.SeoDescription,
                         SeoAlias = request.SeoAlias,
                         SeoTitle = request.SeoTitle,
-                        LanguageId = request.LanguageId 
-                    }
+                        LanguageId = request.LanguageId
+                    });
                 }
+                else
+                {
+                    translations.Add(new ProductTranslation()
+                    {
+                        Name = SystemConstants.ProductConstants.NA,
+                        Description = SystemConstants.ProductConstants.NA,
+                        SeoAlias = SystemConstants.ProductConstants.NA,
+                        LanguageId = language.Id,
+                        SeoDescription = SystemConstants.ProductConstants.NA,
+                        Details = SystemConstants.ProductConstants.NA,
+                        SeoTitle = SystemConstants.ProductConstants.NA
+                    });
+                }
+            }
+            var product = new Product()
+            {
+                Price = request.Price,
+                OriginalPrice = request.OriginalPrice,
+                Stock = request.Stock,
+                ViewCount = 0,
+                DateCreated = DateTime.Now,
+                ProductTranslations = translations
             };
+            //Save image
             if (request.ThumbnailImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
@@ -90,7 +111,7 @@ namespace eShopApplication.Catalog.Products
         {
             //1. select join
             var query = from p in _context.Products
-                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId 
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                         from pic in ppic.DefaultIfEmpty()
                         join c in _context.Categories on pic.CategoryId equals c.Id into picc
