@@ -18,6 +18,6 @@ namespace eShopViewModels.Catalog.Products
         public string SeoAlias { set; get; }
         public string LanguageId { set; get; }
         public bool? IsFeatured { set; get; }
-        public IFormFile ThumbnailImage { get; set; }
+        public IFormFile? ThumbnailImage { get; set; }
     }
 }
