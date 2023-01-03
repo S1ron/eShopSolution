@@ -116,8 +116,10 @@ namespace eShopApplication.Catalog.Products
                         from pic in ppic.DefaultIfEmpty()
                         join c in _context.Categories on pic.CategoryId equals c.Id into picc
                         from c in picc.DefaultIfEmpty()
+                        join pimg in _context.ProductImages on p.Id equals pimg.ProductId into ppimg
+                        from pimg in ppimg.DefaultIfEmpty()
                         where pt.LanguageId == request.LanguageId
-                        select new { p, pt ,pic};
+                        select new { p, pt ,pic, pimg};
             //2. filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
@@ -145,7 +147,8 @@ namespace eShopApplication.Catalog.Products
                     SeoDescription = x.pt.SeoDescription,
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
-                    ViewCount = x.p.ViewCount
+                    ViewCount = x.p.ViewCount,
+                    ThumbnailImage = x.pimg.ImagePath
                 }).ToListAsync();
 
             //4. Select and projection
