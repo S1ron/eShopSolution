@@ -24,7 +24,7 @@ namespace eShopWebApp.Controllers
             return View(new ProductDetailViewModel()
             {
                 Product = product,
-                Category = await _categoryApiClient.GetById(culture, id)
+                //Category = await _categoryApiClient.GetById(culture, id)
             });
         }
 
@@ -39,8 +39,8 @@ namespace eShopWebApp.Controllers
             });
             return View(new ProductCategoryViewModel()
             {
-                Category = await _categoryApiClient.GetById(culture,id),
-                Products = products
+                Products = products,
+                Category = await _categoryApiClient.GetById(culture, id)
             });
         }
     }

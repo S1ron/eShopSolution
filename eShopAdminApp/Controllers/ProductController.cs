@@ -149,5 +149,29 @@ namespace eShopAdminApp.Controllers
             }
             return categoryAssignRequest;
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(new ProductDeleteRequest()
+            {
+                Id = id
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            var result = await _productApiClient.DeleteProduct(request.Id);
+            if (result)
+            {
+                TempData["result"] = "Xóa người dùng thành công!";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "xóa không thành công");
+            return View(request);
+        }
     }
 }
