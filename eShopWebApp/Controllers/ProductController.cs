@@ -17,10 +17,15 @@ namespace eShopWebApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> Detail(int id, string culture)
         {
-            
-            return View();
+
+            var product = await _productApiClient.GetById(id, culture);
+            return View(new ProductDetailViewModel()
+            {
+                Product = product,
+                Category = await _categoryApiClient.GetById(culture, id)
+            });
         }
 
         public async Task<IActionResult> Category(int id, string culture, int page = 1)
