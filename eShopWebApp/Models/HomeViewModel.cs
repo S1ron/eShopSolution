@@ -7,5 +7,6 @@ namespace eShopWebApp.Models
     {
         public List<SlideViewModel> Slides { set; get; }
         public List<ProductViewModel> FeaturedProducts { set; get; }
+        public List<ProductViewModel> LatestProducts { set; get; }
     }
 }
