@@ -2,6 +2,7 @@
 using eShopUtilities.Constants;
 using eShopWebApp.Models;
 using LazZiya.ExpressLocalization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -14,7 +15,6 @@ namespace eShopWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ISlideApiClient _slideApiClient;
         private readonly IProductApiClient _productApiClient;
-
         public HomeController(ILogger<HomeController> logger, ISlideApiClient slideApiClient, IProductApiClient productApiClient)
         {
             _logger = logger;   
